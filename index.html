@@ -3,49 +3,154 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Fun Service - Home</title>
+  <title>Online Fun Service - Login/Register</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fafafa; }
-    header { background: #ff4d4d; color: white; padding: 12px; text-align: center; font-size: 22px; font-weight: bold; }
-    nav { background: #fff; border-bottom: 1px solid #ddd; text-align: center; padding: 8px; }
-    nav a { text-decoration: none; color: #ff4d4d; margin: 0 10px; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
-    .grid { margin: 20px; display: grid; grid-template-columns: 1fr; gap: 15px; }
-    .profile { background: white; border-radius: 15px; box-shadow: 0 3px 8px rgba(0,0,0,0.1); overflow: hidden; text-align: center; }
-    .profile img { width: 100%; height: auto; }
-    .profile h3 { margin: 8px 0; }
-    .tagline { position: fixed; bottom: 0; width: 100%; background: #ff4d4d; color: white; text-align: center; padding: 10px; font-weight: bold; font-size: 14px; }
-    @media (min-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .form-container h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #444;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .form-group input:focus {
+      border-color: #2575fc;
+      box-shadow: 0 0 5px rgba(37,117,252,0.5);
+    }
+
+    .btn {
+      width: 100%;
+      background: #2575fc;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #1a5fd0;
+    }
+
+    .toggle-text {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .toggle-text a {
+      color: #2575fc;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .welcome {
+      font-size: 18px;
+      font-weight: bold;
+      color: green;
+    }
   </style>
 </head>
 <body>
-
-  <header>Online Fun Service</header>
-
-  <nav>
-    <a href="register.html">Registration</a> |
-    <a href="login.html">Login</a> |
-    <a href="admin.html">Admin Login</a> |
-    <a href="index.html">Home</a>
-  </nav>
-
-  <div class="grid">
-    <div class="profile">
-      <img src="https://via.placeholder.com/400x250" alt="Profile">
-      <h3>Anna, 22</h3>
-    </div>
-    <div class="profile">
-      <img src="https://via.placeholder.com/400x250" alt="Profile">
-      <h3>Rahul, 25</h3>
-    </div>
-    <div class="profile">
-      <img src="https://via.placeholder.com/400x250" alt="Profile">
-      <h3>Sophia, 23</h3>
+  <div class="form-container" id="authBox">
+    <h2 id="formTitle">Register</h2>
+    <form id="authForm">
+      <div class="form-group">
+        <label>Mobile Number</label>
+        <input type="tel" id="mobile" placeholder="Enter your mobile number" required pattern="[0-9]{10}">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required>
+      </div>
+      <button type="submit" class="btn" id="submitBtn">Register</button>
+    </form>
+    <div class="toggle-text" id="toggleText">
+      Already have an account? <a onclick="toggleForm()">Login</a>
     </div>
   </div>
 
-  <div class="tagline">Make Friends · Video Call Fun · Meeting</div>
+  <script>
+    let isLogin = false;
 
+    function toggleForm() {
+      isLogin = !isLogin;
+      document.getElementById("formTitle").innerText = isLogin ? "Login" : "Register";
+      document.getElementById("submitBtn").innerText = isLogin ? "Login" : "Register";
+      document.getElementById("toggleText").innerHTML = isLogin 
+        ? `Don't have an account? <a onclick="toggleForm()">Register</a>`
+        : `Already have an account? <a onclick="toggleForm()">Login</a>`;
+    }
+
+    document.getElementById("authForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      let mobile = document.getElementById("mobile").value;
+      let password = document.getElementById("password").value;
+
+      if (!isLogin) {
+        // Registration
+        localStorage.setItem("userMobile", mobile);
+        localStorage.setItem("userPassword", password);
+
+        // Auto login
+        document.getElementById("authBox").innerHTML = `
+          <p class="welcome">🎉 Welcome ${mobile}, You are now logged in!</p>
+        `;
+      } else {
+        // Login check
+        let savedMobile = localStorage.getItem("userMobile");
+        let savedPassword = localStorage.getItem("userPassword");
+
+        if (mobile === savedMobile && password === savedPassword) {
+          document.getElementById("authBox").innerHTML = `
+            <p class="welcome">✅ Login Successful! Welcome back ${mobile}</p>
+          `;
+        } else {
+          alert("❌ Invalid mobile or password");
+        }
+      }
+    });
+  </script>
 </body>
 </html>
