@@ -3,108 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Fun Service</title>
+  <title>Online Fun Service - Home</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #fafafa;
-    }
-
-    /* Header */
-    header {
-      background: #ff4d4d;
-      color: white;
-      padding: 12px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-    }
-
-    /* Login Box (Top Right) */
-    .login-box {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background: white;
-      padding: 10px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      width: 180px;
-      font-size: 14px;
-      z-index: 10;
-    }
-    .login-box input,
-    .login-box select,
-    .login-box button {
-      width: 100%;
-      margin: 4px 0;
-      padding: 6px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 13px;
-    }
-    .login-box button {
-      background: #ff4d4d;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    /* Profile Cards Grid */
-    .grid {
-      margin: 70px 10px 60px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 15px;
-    }
-    .profile {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-      overflow: hidden;
-      text-align: center;
-    }
-    .profile img {
-      width: 100%;
-      height: auto;
-    }
-    .profile h3 {
-      margin: 8px 0;
-    }
-    .profile p {
-      margin: 0 0 10px;
-      color: gray;
-      font-size: 14px;
-    }
-
-    /* Tagline */
-    .tagline {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: #ff4d4d;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    /* Responsive */
-    @media (min-width: 600px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    @media (min-width: 900px) {
-      .grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fafafa; }
+    header { background: #ff4d4d; color: white; padding: 12px; text-align: center; font-size: 22px; font-weight: bold; }
+    nav { background: #fff; border-bottom: 1px solid #ddd; text-align: center; padding: 8px; }
+    nav a { text-decoration: none; color: #ff4d4d; margin: 0 10px; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+    .grid { margin: 20px; display: grid; grid-template-columns: 1fr; gap: 15px; }
+    .profile { background: white; border-radius: 15px; box-shadow: 0 3px 8px rgba(0,0,0,0.1); overflow: hidden; text-align: center; }
+    .profile img { width: 100%; height: auto; }
+    .profile h3 { margin: 8px 0; }
+    .tagline { position: fixed; bottom: 0; width: 100%; background: #ff4d4d; color: white; text-align: center; padding: 10px; font-weight: bold; font-size: 14px; }
+    @media (min-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
   </style>
 </head>
+<body>
+
+  <header>Online Fun Service</header>
+
+  <nav>
+    <a href="register.html">Registration</a> |
+    <a href="login.html">Login</a> |
+    <a href="admin.html">Admin Login</a> |
+    <a href="index.html">Home</a>
+  </nav>
+
+  <div class="grid">
+    <div class="profile">
+      <img src="https://via.placeholder.com/400x250" alt="Profile">
+      <h3>Anna, 22</h3>
+    </div>
+    <div class="profile">
+      <img src="https://via.placeholder.com/400x250" alt="Profile">
+      <h3>Rahul, 25</h3>
+    </div>
+    <div class="profile">
+      <img src="https://via.placeholder.com/400x250" alt="Profile">
+      <h3>Sophia, 23</h3>
+    </div>
+  </div>
+
+  <div class="tagline">Make Friends · Video Call Fun · Meeting</div>
+
+</body>
+</html></head>
 <body>
 
   <header>Online Fun Service</header>
