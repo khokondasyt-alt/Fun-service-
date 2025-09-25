@@ -3,178 +3,136 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Model Showcase</title>
+  <title>Hot Video Call Service</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #3b1dff, #0a003d);
-      color: white;
-      margin: 0;
-      padding: 0;
-    }
-    .tabs {
-      display: flex;
-      justify-content: center;
-      background: #111;
-      padding: 10px;
-    }
-    .tabs button {
-      flex: 1;
-      background: #222;
-      border: none;
-      padding: 10px;
-      margin: 2px;
-      color: #fff;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .tabs button.active { background: orange; }
-    .container {
-      width: 100%;
-      max-width: 900px;
-      margin: 20px auto;
-      padding: 20px;
-    }
-    h2 { margin-bottom: 15px; }
-    input {
-      width: 90%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 6px;
-      border: none;
-    }
-    button {
-      background: orange;
-      color: #fff;
-      border: none;
-      padding: 10px 15px;
-      margin: 5px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    button.reject { background: #444; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-    }
-    .model-box {
-      background: rgba(255,255,255,0.15);
-      padding: 12px;
-      border-radius: 6px;
-      text-align: center;
-    }
-    .dashboard { display: none; }
-    .logout {
-      float: right;
-      background: red;
-      padding: 6px 10px;
-      border-radius: 6px;
-    }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
+    header { background: #ff4d4d; color: white; padding: 15px; text-align: center; }
+    .container { max-width: 900px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h2 { text-align: center; color: #333; }
+    form { display: flex; flex-direction: column; gap: 10px; }
+    input, select, button { padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; }
+    button { background: #ff4d4d; color: white; border: none; cursor: pointer; }
+    button:hover { background: #e60000; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
+    .model-card { background: #fff0f0; padding: 10px; text-align: center; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1);}
   </style>
 </head>
 <body>
 
-  <!-- Tabs -->
-  <div class="tabs">
-    <button onclick="showPage('homePage')" class="active">Home</button>
-    <button onclick="showPage('registerPage')">Register</button>
-    <button onclick="showPage('userLoginPage')">User Login</button>
-    <button onclick="showPage('adminLoginPage')">Admin Login</button>
-  </div>
+<header>
+  <h1>Hot Video Call Service</h1>
+</header>
 
-  <!-- Homepage (Public Model Showcase) -->
-  <div class="container" id="homePage">
-    <h2>All Models</h2>
-    <div class="grid">
-      <div class="model-box">
-        <b>AYUSHI</b><br>7407829350<br>
-        <small>Approved</small>
-      </div>
-      <div class="model-box">
-        <b>PUJA KUMARI</b><br>7407829356<br>
-        <small>Pending</small>
-      </div>
-      <div class="model-box">
-        <b>ROHAN</b><br>7407829357<br>
-        <small>Approved</small>
-      </div>
-    </div>
-  </div>
+<div class="container" id="auth-section">
+  <h2>Login / Register</h2>
 
-  <!-- Registration -->
-  <div class="container" id="registerPage" style="display:none;">
-    <h2>User Registration</h2>
-    <input type="text" placeholder="Full Name">
-    <input type="text" placeholder="Mobile Number">
-    <input type="password" placeholder="Password">
-    <button>Register</button>
-  </div>
+  <!-- Registration Form -->
+  <form id="register-form">
+    <h3>Register</h3>
+    <input type="text" id="reg-mobile" placeholder="Mobile Number" required>
+    <input type="password" id="reg-password" placeholder="Password" required>
+    <select id="reg-gender" required>
+      <option value="">Select Gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+    <button type="button" onclick="registerUser()">Register</button>
+  </form>
 
-  <!-- User Login -->
-  <div class="container" id="userLoginPage" style="display:none;">
-    <h2>User Login</h2>
-    <input type="text" placeholder="Mobile Number">
-    <input type="password" placeholder="Password">
-    <button>Login</button>
-  </div>
+  <hr>
+
+  <!-- Login Form -->
+  <form id="login-form">
+    <h3>User Login</h3>
+    <input type="text" id="login-mobile" placeholder="Mobile Number" required>
+    <input type="password" id="login-password" placeholder="Password" required>
+    <button type="button" onclick="loginUser()">Login</button>
+  </form>
+
+  <hr>
 
   <!-- Admin Login -->
-  <div class="container" id="adminLoginPage" style="display:none;">
-    <h2>Admin Login</h2>
-    <input type="text" id="adminUser" placeholder="Admin Username">
-    <input type="password" id="adminPass" placeholder="Password">
-    <button onclick="adminLogin()">Login</button>
+  <form id="admin-form">
+    <h3>Admin Login</h3>
+    <input type="text" id="admin-user" placeholder="Admin Username" required>
+    <input type="password" id="admin-pass" placeholder="Password" required>
+    <button type="button" onclick="adminLogin()">Admin Login</button>
+  </form>
+</div>
+
+<div class="container" id="models-section" style="display:none;">
+  <h2>Available Models</h2>
+  <div class="grid" id="models-grid">
+    <!-- Sample Models -->
+    <div class="model-card">Model 1</div>
+    <div class="model-card">Model 2</div>
+    <div class="model-card">Model 3</div>
+    <div class="model-card">Model 4</div>
   </div>
+</div>
 
-  <!-- Admin Dashboard -->
-  <div class="container dashboard" id="dashboardPage">
-    <button class="logout" onclick="logout()">Logout</button>
-    <h2>Admin Panel</h2>
-    <h3>Pending Models for Approval</h3>
-    <div class="grid">
-      <div class="model-box">
-        <b>PUJA KUMARI</b><br>7407829356<br>
-        <button>Approve</button>
-        <button class="reject">Reject</button>
-      </div>
-    </div>
-  </div>
+<script>
+  const users = [];
+  const models = [];
 
-  <script>
-    // Tab Switching
-    function showPage(pageId) {
-      let pages = ["homePage","registerPage","userLoginPage","adminLoginPage"];
-      pages.forEach(p => document.getElementById(p).style.display = "none");
-      document.getElementById(pageId).style.display = "block";
+  function registerUser() {
+    const mobile = document.getElementById('reg-mobile').value;
+    const password = document.getElementById('reg-password').value;
+    const gender = document.getElementById('reg-gender').value;
 
-      let btns = document.querySelectorAll(".tabs button");
-      btns.forEach(b => b.classList.remove("active"));
-      event.target.classList.add("active");
+    if (!mobile || !password || !gender) { alert("Please fill all fields!"); return; }
+
+    const user = { mobile, password, gender };
+    users.push(user);
+
+    if (gender === 'female') {
+      alert("You are registered as a model! Admin approval might be needed.");
+      models.push(user);
+    } else {
+      alert("Registration successful! You can login directly.");
     }
 
-    // Admin Login
-    function adminLogin() {
-      let user = document.getElementById("adminUser").value;
-      let pass = document.getElementById("adminPass").value;
+    document.getElementById('register-form').reset();
+    showModelsForGuest();
+  }
 
-      if (user === "admin" && pass === "1234") {
-        document.getElementById("homePage").style.display = "none";
-        document.getElementById("registerPage").style.display = "none";
-        document.getElementById("userLoginPage").style.display = "none";
-        document.getElementById("adminLoginPage").style.display = "none";
-        document.getElementById("dashboardPage").style.display = "block";
-      } else {
-        alert("Invalid Admin Credentials!");
-      }
+  function loginUser() {
+    const mobile = document.getElementById('login-mobile').value;
+    const password = document.getElementById('login-password').value;
+
+    const user = users.find(u => u.mobile === mobile && u.password === password);
+    if (!user) { alert("Invalid credentials!"); return; }
+
+    if (user.gender === 'male') {
+      alert("Welcome, male user! Direct login successful.");
+    } else {
+      alert("Welcome, model! Access granted.");
     }
 
-    // Logout
-    function logout() {
-      document.getElementById("dashboardPage").style.display = "none";
-      document.getElementById("homePage").style.display = "block";
+    document.getElementById('auth-section').style.display = 'none';
+    document.getElementById('models-section').style.display = 'block';
+  }
+
+  function adminLogin() {
+    const user = document.getElementById('admin-user').value;
+    const pass = document.getElementById('admin-pass').value;
+
+    if (user === 'admin' && pass === 'admin123') {
+      alert("Admin logged in!");
+      console.log("Registered users:", users);
+      console.log("Models:", models);
+    } else {
+      alert("Invalid admin credentials!");
     }
-  </script>
+  }
+
+  function showModelsForGuest() {
+    document.getElementById('models-section').style.display = 'block';
+  }
+
+  // Show models grid for unlogged users
+  showModelsForGuest();
+</script>
 
 </body>
 </html>
