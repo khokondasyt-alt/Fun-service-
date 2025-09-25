@@ -9,32 +9,59 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f7f7f7;
-      text-align: center;
+      background: #fafafa;
     }
+
+    /* Header */
     header {
       background: #ff4d4d;
       color: white;
-      padding: 15px;
-      font-size: 24px;
+      padding: 12px;
+      text-align: center;
+      font-size: 22px;
       font-weight: bold;
     }
+
+    /* Navigation Line */
+    nav {
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+      padding: 8px;
+      font-size: 14px;
+    }
+    nav a {
+      text-decoration: none;
+      color: #ff4d4d;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Login Box (Top Right) */
     .login-box {
-      position: absolute;
-      top: 10px;
+      position: fixed;
+      top: 70px;
       right: 10px;
       background: white;
       padding: 10px;
       border-radius: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      width: 220px;
+      width: 180px;
+      font-size: 14px;
+      z-index: 10;
     }
-    .login-box input, .login-box select, .login-box button {
+    .login-box input,
+    .login-box select,
+    .login-box button {
       width: 100%;
-      margin: 5px 0;
-      padding: 8px;
+      margin: 4px 0;
+      padding: 6px;
       border: 1px solid #ddd;
       border-radius: 5px;
+      font-size: 13px;
     }
     .login-box button {
       background: #ff4d4d;
@@ -42,35 +69,57 @@
       border: none;
       cursor: pointer;
     }
+
+    /* Profile Cards Grid */
     .grid {
+      margin: 150px 10px 60px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-template-columns: 1fr;
       gap: 15px;
-      margin: 80px 20px 50px;
     }
     .profile {
       background: white;
       border-radius: 15px;
       box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-      padding: 10px;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .profile:hover {
-      transform: scale(1.05);
+      overflow: hidden;
+      text-align: center;
     }
     .profile img {
       width: 100%;
-      border-radius: 10px;
+      height: auto;
     }
+    .profile h3 {
+      margin: 8px 0;
+    }
+    .profile p {
+      margin: 0 0 10px;
+      color: gray;
+      font-size: 14px;
+    }
+
+    /* Tagline */
     .tagline {
       position: fixed;
       bottom: 0;
       width: 100%;
       background: #ff4d4d;
       color: white;
-      padding: 12px;
+      text-align: center;
+      padding: 10px;
       font-weight: bold;
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (min-width: 600px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
   </style>
 </head>
@@ -78,9 +127,22 @@
 
   <header>Online Fun Service</header>
 
+  <!-- Navigation Line -->
+  <nav>
+    <a href="#">Registration</a> |
+    <a href="#">Login</a> |
+    <a href="#">Admin Login</a> |
+    <a href="#">Home</a>
+  </nav>
+
   <!-- Small Login/Register box -->
   <div class="login-box">
-    <h4>Login / Register</h4>
+    <h4>Login</h4>
+    <input type="text" placeholder="Mobile Number">
+    <input type="password" placeholder="Password">
+    <button>Login</button>
+    <hr>
+    <h4>Register</h4>
     <input type="text" placeholder="Mobile Number">
     <input type="password" placeholder="Password">
     <select>
@@ -90,33 +152,33 @@
       <option>Other</option>
     </select>
     <button>Register</button>
-    <hr>
-    <input type="text" placeholder="Mobile Number">
-    <input type="password" placeholder="Password">
-    <button>Login</button>
   </div>
 
-  <!-- Grid View Profiles -->
+  <!-- Profile Grid -->
   <div class="grid">
     <div class="profile">
-      <img src="https://via.placeholder.com/200" alt="Profile">
+      <img src="https://via.placeholder.com/400x250" alt="Profile">
       <h3>Anna, 22</h3>
+      <p>Click to view details</p>
     </div>
     <div class="profile">
-      <img src="https://via.placeholder.com/200" alt="Profile">
+      <img src="https://via.placeholder.com/400x250" alt="Profile">
       <h3>Rahul, 25</h3>
+      <p>Click to view details</p>
     </div>
     <div class="profile">
-      <img src="https://via.placeholder.com/200" alt="Profile">
+      <img src="https://via.placeholder.com/400x250" alt="Profile">
       <h3>Sophia, 23</h3>
+      <p>Click to view details</p>
     </div>
     <div class="profile">
-      <img src="https://via.placeholder.com/200" alt="Profile">
+      <img src="https://via.placeholder.com/400x250" alt="Profile">
       <h3>Aryan, 26</h3>
+      <p>Click to view details</p>
     </div>
   </div>
 
-  <!-- App Tagline -->
+  <!-- Tagline -->
   <div class="tagline">
     Make Friends · Video Call Fun · Meeting
   </div>
