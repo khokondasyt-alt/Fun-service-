@@ -3,136 +3,123 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hot Video Call Service</title>
+  <title>Online Fun Service</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
-    header { background: #ff4d4d; color: white; padding: 15px; text-align: center; }
-    .container { max-width: 900px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    h2 { text-align: center; color: #333; }
-    form { display: flex; flex-direction: column; gap: 10px; }
-    input, select, button { padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; }
-    button { background: #ff4d4d; color: white; border: none; cursor: pointer; }
-    button:hover { background: #e60000; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
-    .model-card { background: #fff0f0; padding: 10px; text-align: center; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1);}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f7f7;
+      text-align: center;
+    }
+    header {
+      background: #ff4d4d;
+      color: white;
+      padding: 15px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .login-box {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      width: 220px;
+    }
+    .login-box input, .login-box select, .login-box button {
+      width: 100%;
+      margin: 5px 0;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .login-box button {
+      background: #ff4d4d;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin: 80px 20px 50px;
+    }
+    .profile {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      padding: 10px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .profile:hover {
+      transform: scale(1.05);
+    }
+    .profile img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .tagline {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #ff4d4d;
+      color: white;
+      padding: 12px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Hot Video Call Service</h1>
-</header>
+  <header>Online Fun Service</header>
 
-<div class="container" id="auth-section">
-  <h2>Login / Register</h2>
-
-  <!-- Registration Form -->
-  <form id="register-form">
-    <h3>Register</h3>
-    <input type="text" id="reg-mobile" placeholder="Mobile Number" required>
-    <input type="password" id="reg-password" placeholder="Password" required>
-    <select id="reg-gender" required>
-      <option value="">Select Gender</option>
-      <option value="male">Male</option>
-      <option value="female">Female</option>
+  <!-- Small Login/Register box -->
+  <div class="login-box">
+    <h4>Login / Register</h4>
+    <input type="text" placeholder="Mobile Number">
+    <input type="password" placeholder="Password">
+    <select>
+      <option>Select Gender</option>
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
     </select>
-    <button type="button" onclick="registerUser()">Register</button>
-  </form>
-
-  <hr>
-
-  <!-- Login Form -->
-  <form id="login-form">
-    <h3>User Login</h3>
-    <input type="text" id="login-mobile" placeholder="Mobile Number" required>
-    <input type="password" id="login-password" placeholder="Password" required>
-    <button type="button" onclick="loginUser()">Login</button>
-  </form>
-
-  <hr>
-
-  <!-- Admin Login -->
-  <form id="admin-form">
-    <h3>Admin Login</h3>
-    <input type="text" id="admin-user" placeholder="Admin Username" required>
-    <input type="password" id="admin-pass" placeholder="Password" required>
-    <button type="button" onclick="adminLogin()">Admin Login</button>
-  </form>
-</div>
-
-<div class="container" id="models-section" style="display:none;">
-  <h2>Available Models</h2>
-  <div class="grid" id="models-grid">
-    <!-- Sample Models -->
-    <div class="model-card">Model 1</div>
-    <div class="model-card">Model 2</div>
-    <div class="model-card">Model 3</div>
-    <div class="model-card">Model 4</div>
+    <button>Register</button>
+    <hr>
+    <input type="text" placeholder="Mobile Number">
+    <input type="password" placeholder="Password">
+    <button>Login</button>
   </div>
-</div>
 
-<script>
-  const users = [];
-  const models = [];
+  <!-- Grid View Profiles -->
+  <div class="grid">
+    <div class="profile">
+      <img src="https://via.placeholder.com/200" alt="Profile">
+      <h3>Anna, 22</h3>
+    </div>
+    <div class="profile">
+      <img src="https://via.placeholder.com/200" alt="Profile">
+      <h3>Rahul, 25</h3>
+    </div>
+    <div class="profile">
+      <img src="https://via.placeholder.com/200" alt="Profile">
+      <h3>Sophia, 23</h3>
+    </div>
+    <div class="profile">
+      <img src="https://via.placeholder.com/200" alt="Profile">
+      <h3>Aryan, 26</h3>
+    </div>
+  </div>
 
-  function registerUser() {
-    const mobile = document.getElementById('reg-mobile').value;
-    const password = document.getElementById('reg-password').value;
-    const gender = document.getElementById('reg-gender').value;
-
-    if (!mobile || !password || !gender) { alert("Please fill all fields!"); return; }
-
-    const user = { mobile, password, gender };
-    users.push(user);
-
-    if (gender === 'female') {
-      alert("You are registered as a model! Admin approval might be needed.");
-      models.push(user);
-    } else {
-      alert("Registration successful! You can login directly.");
-    }
-
-    document.getElementById('register-form').reset();
-    showModelsForGuest();
-  }
-
-  function loginUser() {
-    const mobile = document.getElementById('login-mobile').value;
-    const password = document.getElementById('login-password').value;
-
-    const user = users.find(u => u.mobile === mobile && u.password === password);
-    if (!user) { alert("Invalid credentials!"); return; }
-
-    if (user.gender === 'male') {
-      alert("Welcome, male user! Direct login successful.");
-    } else {
-      alert("Welcome, model! Access granted.");
-    }
-
-    document.getElementById('auth-section').style.display = 'none';
-    document.getElementById('models-section').style.display = 'block';
-  }
-
-  function adminLogin() {
-    const user = document.getElementById('admin-user').value;
-    const pass = document.getElementById('admin-pass').value;
-
-    if (user === 'admin' && pass === 'admin123') {
-      alert("Admin logged in!");
-      console.log("Registered users:", users);
-      console.log("Models:", models);
-    } else {
-      alert("Invalid admin credentials!");
-    }
-  }
-
-  function showModelsForGuest() {
-    document.getElementById('models-section').style.display = 'block';
-  }
-
-  // Show models grid for unlogged users
-  showModelsForGuest();
-</script>
+  <!-- App Tagline -->
+  <div class="tagline">
+    Make Friends · Video Call Fun · Meeting
+  </div>
 
 </body>
 </html>
