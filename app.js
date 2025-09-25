@@ -11,7 +11,7 @@ const $ = (s) => document.querySelector(s);
 const $$ = (s) => document.querySelectorAll(s);
 
 const LS_KEY = 'ofs_users_v1'; // stores users array
-const ADMIN_CREDENTIALS = {user:'admin', pass:'admin123'}; // change as needed
+const ADMIN_CREDENTIALS = {user:'admin', pass:'731123'}; // change as needed
 
 function loadUsers(){
   try {
