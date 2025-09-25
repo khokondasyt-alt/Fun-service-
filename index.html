@@ -3,45 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Online Fun Service - Home</title>
+<title>Online Fun Service</title>
 <link rel="stylesheet" href="style.css">
 <script src="js/script.js" defer></script>
 <style>
-/* Floating corner forms */
+/* Reset and body */
+body { margin:0; padding:0; font-family:'Arial', sans-serif; background:#111; color:#fff; }
+
+/* Header */
+header { background:#ff3366; padding:1rem; text-align:center; font-size:1.5rem; font-weight:bold; }
+
+/* Floating registration/login overlay */
 .form-overlay {
   position: fixed;
   top: 20px;
   right: 20px;
-  background: rgba(255,255,255,0.95);
+  width: 280px;
+  background: rgba(0,0,0,0.85);
   padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-  width: 250px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
   z-index: 1000;
 }
-.form-overlay h3 { margin-top: 0; font-size: 1.1rem; text-align:center; color:#ff3366; }
-.form-overlay input, .form-overlay select, .form-overlay button { margin-bottom: 0.5rem; }
+.form-overlay h3 { text-align:center; margin-top:0; color:#ff3366; }
+.form-overlay input, .form-overlay select, .form-overlay button {
+  width:100%;
+  padding:0.6rem;
+  margin:0.4rem 0;
+  border-radius:8px;
+  border:none;
+}
+.form-overlay button {
+  background:#ff3366; color:#fff; font-weight:bold; cursor:pointer;
+}
+.form-overlay p { text-align:center; font-size:0.85rem; color:#aaa; cursor:pointer; }
 
-/* Fullscreen model grid */
+/* Fullscreen model grid (like Tango) */
 #modelGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 10px;
-  padding: 1rem;
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap:10px;
+  padding:10px;
 }
+
+/* Card styling */
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius:15px;
+  cursor:pointer;
+  transition: transform 0.2s ease;
+}
+.card:hover { transform: scale(1.05); }
 .card img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  border-radius:15px;
 }
-.card { background: #fff; padding: 0.3rem; text-align:center; }
+
+/* Online badge */
+.online-badge {
+  position: absolute;
+  top:8px;
+  left:8px;
+  background:#4caf50;
+  color:#fff;
+  padding:3px 6px;
+  border-radius:8px;
+  font-size:0.75rem;
+}
+
+/* Bottom nav */
+nav {
+  display:flex;
+  justify-content:space-around;
+  background:#222;
+  padding:0.5rem;
+  position:fixed;
+  bottom:0;
+  width:100%;
+}
+nav a { color:#ff3366; font-weight:bold; text-decoration:none; }
 </style>
 </head>
 <body>
 
-<header>
-  <h1 style="text-align:center; color:#fff; background:#ff3366; padding:1rem;">Online Fun Service</h1>
-</header>
+<header>Online Fun Service</header>
 
 <!-- Floating Registration Form -->
 <div class="form-overlay" id="registerPanel">
@@ -51,12 +100,12 @@
     <input type="tel" placeholder="Mobile" required id="mobile">
     <input type="password" placeholder="Password" required id="password">
     <select id="role" required>
-      <option value="">Option</option>
+      <option value="">Select Option</option>
       <option value="male">Male (User)</option>
       <option value="female">Female (Model)</option>
     </select>
     <button type="submit">Register</button>
-    <p style="text-align:center; font-size:0.9rem; color:#555; cursor:pointer;" onclick="toggleForms()">Login</p>
+    <p onclick="toggleForms()">Login</p>
   </form>
 </div>
 
@@ -67,7 +116,7 @@
     <input type="tel" placeholder="Mobile" required id="loginMobile">
     <input type="password" placeholder="Password" required id="loginPassword">
     <button type="submit">Login</button>
-    <p style="text-align:center; font-size:0.9rem; color:#555; cursor:pointer;" onclick="toggleForms()">Register</p>
+    <p onclick="toggleForms()">Register</p>
   </form>
 </div>
 
@@ -76,22 +125,53 @@
   <div id="modelGrid"></div>
 </div>
 
+<!-- Bottom Navigation -->
+<nav>
+  <a href="#">Home</a>
+  <a href="#">Models</a>
+  <a href="#">Profile</a>
+</nav>
+
 <script>
-// Show models in grid
+// Sample models
+const models = [
+  { name:"Anita", online:true, img:"https://picsum.photos/200/300?random=1" },
+  { name:"Sofia", online:true, img:"https://picsum.photos/200/300?random=2" },
+  { name:"Meera", online:false, img:"https://picsum.photos/200/300?random=3" },
+  { name:"Rina", online:true, img:"https://picsum.photos/200/300?random=4" }
+];
+
+// Display models in grid
+function displayModels(gridId){
+  const modelGrid = document.getElementById(gridId);
+  if(!modelGrid) return;
+  modelGrid.innerHTML = "";
+  models.forEach(model=>{
+    if(model.online){
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="${model.img}" alt="${model.name}">
+        <div class="online-badge">Online</div>
+      `;
+      card.onclick = ()=>alert(`Profile placeholder for ${model.name}`);
+      modelGrid.appendChild(card);
+    }
+  });
+}
 displayModels("modelGrid");
 
-// Toggle forms
-function toggleForms() {
-  const reg = document.getElementById("registerPanel");
-  const log = document.getElementById("loginPanel");
-  if (reg.style.display === "none") {
-    reg.style.display = "block";
-    log.style.display = "none";
-  } else {
-    reg.style.display = "none";
-    log.style.display = "block";
-  }
+// Toggle registration/login
+function toggleForms(){
+  const reg=document.getElementById("registerPanel");
+  const log=document.getElementById("loginPanel");
+  if(reg.style.display==="none"){ reg.style.display="block"; log.style.display="none"; }
+  else{ reg.style.display="none"; log.style.display="block"; }
 }
+
+// Placeholder registration/login
+function registerUser(e){ e.preventDefault(); alert("Registered (placeholder)"); }
+function loginUser(e){ e.preventDefault(); alert("Logged in (placeholder)"); }
 </script>
 
 </body>
